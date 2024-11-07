@@ -1,7 +1,10 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.User;
+import com.example.demo.requests.StoreUserRequest;
+import com.example.demo.requests.UpdateUserRequest;
 import com.example.demo.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,19 +24,18 @@ public class UserController {
     }
 
     @PostMapping
-    public User store(@RequestBody User user) {
-        return userService.store(user);
+    public User store(@RequestBody @Valid StoreUserRequest request) {
+        return userService.store(request);
     }
 
     @GetMapping("/{id}")
     public User show(@PathVariable Long id) {
-        return userService.show(id);
+        return userService.findById(id);
     }
 
     @PutMapping("/{id}")
-    public User update(@PathVariable Long id, @RequestBody User user) {
-        user.setId(id);
-        return userService.update(user);
+    public User update(@PathVariable Long id, @RequestBody @Valid UpdateUserRequest request) {
+        return userService.update(id, request);
     }
 
     @DeleteMapping("/{id}")

@@ -2,6 +2,8 @@ package com.example.demo.services;
 
 import com.example.demo.models.User;
 import com.example.demo.repositories.UserRepository;
+import com.example.demo.requests.StoreUserRequest;
+import com.example.demo.requests.UpdateUserRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,16 +20,28 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User store(User user) {
+    public User store(StoreUserRequest request) {
+        var user = transformRequest(request, new User());
+        user.setUsername(request.getUsername());
+
         return userRepository.save(user);
     }
 
-    public User show(Long id) {
+    private User transformRequest(UpdateUserRequest request, User user) {
+        user.setName(request.getName());
+        user.setLastname(request.getLastname());
+        user.setAge(request.getAge());
+        return user;
+    }
+
+    public User findById(Long id) {
         return userRepository.findById(id).orElseThrow();
     }
 
-    public User update(User user) {
-        return userRepository.save(user);
+    public User update(Long id, UpdateUserRequest request) {
+        var user = findById(id);
+
+        return userRepository.save(transformRequest(request, user));
     }
 
     public void destroy(Long id) {

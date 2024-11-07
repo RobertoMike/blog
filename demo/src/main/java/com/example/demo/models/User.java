@@ -1,16 +1,28 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.GeneratedColumn;
 
 @Entity(name = "users")
 public class User {
     @Id
     @GeneratedValue()
     private Long id;
+    private String username;
     private String name;
     private String lastname;
     private Integer age;
+
+    public User(Long id, String username, String name, String lastname, Integer age) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.lastname = lastname;
+        this.age = age;
+    }
+
+    public User() {
+
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -18,6 +30,14 @@ public class User {
 
     public Long getId() {
         return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {
