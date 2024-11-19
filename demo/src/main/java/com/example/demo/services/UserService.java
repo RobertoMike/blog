@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.models.User;
 import com.example.demo.repositories.UserRepository;
 import com.example.demo.requests.StoreUserRequest;
@@ -35,7 +36,7 @@ public class UserService {
     }
 
     public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow();
+        return userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found"));
     }
 
     public User update(Long id, UpdateUserRequest request) {
