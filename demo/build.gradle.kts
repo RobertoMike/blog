@@ -20,7 +20,7 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-
+    implementation("io.github.robertomike:baradum-apache-tomcat:2.0.2")
     implementation("org.springframework.boot:spring-boot-starter-validation")
 
     runtimeOnly("com.mysql:mysql-connector-j")

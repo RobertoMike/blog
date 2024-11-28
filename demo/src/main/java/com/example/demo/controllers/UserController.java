@@ -23,6 +23,11 @@ public class UserController {
         return userService.index();
     }
 
+    @PostMapping("/with-body")
+    public List<User> indexWithBody() {
+        return userService.indexWithBody();
+    }
+
     @PostMapping
     public User store(@RequestBody @Valid StoreUserRequest request) {
         return userService.store(request);

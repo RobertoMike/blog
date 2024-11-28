@@ -1,9 +1,12 @@
 package com.example.demo.models;
 
-import jakarta.persistence.*;
+import io.github.robertomike.hefesto.models.HibernateModel;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 @Entity(name = "users")
-public class User {
+public class User implements HibernateModel {
     @Id
     @GeneratedValue()
     private Long id;
