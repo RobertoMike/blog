@@ -1,25 +1,16 @@
-import Home from './pages/Home.vue'
 import {createRouter, createWebHistory} from 'vue-router'
+import {handleHotUpdate, routes} from 'vue-router/auto-routes'
 
-
-const routes = [
-    { path: '/', component: Home },
-    {
-        path: '/about',
-        component: () => import('./pages/About.vue')
-    },
-    {
-        path: '/users/:id(\\d+)',
-        component: () => import('./pages/users/Show.vue')
-    },
-    {
-        path: '/:pathMatch(.*)*',
-        component: () => import('./pages/errors/NotFound.vue')
-    },
-]
-
-export default createRouter({
+const router = createRouter({
     // If you don't want that the url change, you can use createMemoryHistory
     history: createWebHistory(),
     routes,
 })
+
+// This will update routes at runtime without reloading the page
+if (import.meta.hot) {
+    handleHotUpdate(router)
+}
+
+// We export this to be used in main.js
+export default router
